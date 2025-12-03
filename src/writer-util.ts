@@ -89,6 +89,7 @@ export class WriterUtil {
     public static readonly STATEMODEL: number[] = [47, 83, 116, 97, 116, 101, 77, 111, 100, 101, 108] // = '/StateModel'
     public static readonly OPACITY: number[] = [47, 67, 65] // = '/CA'
     public static readonly _OPACITY: number[] = [47, 99, 97] // = '/ca'
+    public static readonly BLEND_MODE: number[] = [47, 66, 77] // = '/BM'
     public static readonly BORDER: number[] = [47, 66, 111, 114, 100, 101, 114] // = '/Border'
     public static readonly PAGE_REFERENCE: number[] = [47, 80] // = '/P'
     public static readonly DEFAULT_APPEARANCE: number[] = [47, 68, 65] // = '/DA'

@@ -199,6 +199,7 @@ export class GraphicsStateParameter {
 
     CA : number | undefined = undefined
     ca : number | undefined = undefined
+    blendMode : string | undefined = undefined
 
     constructor(object_id: ReferencePointer | undefined = undefined) {
         this.object_id = object_id
@@ -231,6 +232,13 @@ export class GraphicsStateParameter {
             ret = ret.concat(WriterUtil._OPACITY)
             ret.push(WriterUtil.SPACE)
             ret = ret.concat(Util.convertNumberToCharArray(this.ca))
+            ret.push(WriterUtil.SPACE)
+        }
+
+        if (this.blendMode) {
+            ret = ret.concat(WriterUtil.BLEND_MODE)
+            ret.push(WriterUtil.SPACE)
+            ret = ret.concat(Util.convertStringToAscii(this.blendMode))
             ret.push(WriterUtil.SPACE)
         }
 

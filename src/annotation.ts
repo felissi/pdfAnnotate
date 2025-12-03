@@ -9,6 +9,7 @@ import { InkAnnotationObj } from './annotations/ink_annotation';
 import { Util } from './util';
 import { Writer } from './writer';
 import { Font } from './fonts';
+import { FreeHighlightAnnotationObj } from './annotations/free_highlight';
 
 export class ParameterParser {
     /**
@@ -505,6 +506,46 @@ export class AnnotationFactory {
 
     createPopupAnnotation() {
         throw Error("No yet implemented")
+    }
+
+    /**
+     * Creates an ink annotation
+     * page : the number of the PDF document page, where the annotation must be attached
+     * rect : the position of the annotation on the page
+     * contents : the content of the annotation
+     * author : the author of the annotation
+     * inkList : a list of list containing the points for drawing the lines
+     * color : the color of the annotation in rgb. Can be of domain 0 - 255 or 0 - 1
+     * */
+    createFreeHighlightAnnotation(params: {
+        page: number;
+        rect: number[];
+        contents: string;
+        author: string;
+        inkList: number[][] | number[];
+        color?: { r: number; g: number; b: number };
+        opacity?: number;
+        strokeWidth?: number;
+        createDefaultAppearanceStream?: boolean;
+    }): FreeHighlightAnnotationObj {
+        // let params = ParameterParser.parseParameters(values)
+        const { createDefaultAppearanceStream = true } = params;
+
+        let annot: FreeHighlightAnnotationObj = new FreeHighlightAnnotationObj({
+            strokeWidth: params.strokeWidth || 12,
+        });
+        annot = (<any>Object).assign(annot, this.createBaseAnnotation(params.page));
+        annot = (<any>Object).assign(annot, params);
+
+        annot.validate();
+
+        if (createDefaultAppearanceStream) {
+            annot.createDefaultAppearanceStream();
+        }
+
+        this.annotations.push(annot);
+
+        return annot;
     }
 
     /**
