@@ -328,6 +328,11 @@ export class GraphicsObject extends Operator {
         this.addOperator("rg", [color.r, color.g, color.b])
         return this
     }
+
+    setLineWidth(width : number) : GraphicsObject {
+        this.addOperator("w", [width])
+        return this
+    }
 }
 
 export class TextObject extends Operator {
